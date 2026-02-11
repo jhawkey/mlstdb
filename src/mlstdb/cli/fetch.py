@@ -104,6 +104,9 @@ def fetch(db, exclude, match, scheme_uris, filter, resume, verbose):
                        for _ in r['databases'])
         
         for resource in tqdm(resources, desc="Processing resources"):
+            if resource['name'] == 'rMLST':
+                info(f"Skipping rMLST resource: {resource['description']}")
+                continue
             if 'databases' in resource:
                 for database in resource['databases']:
                     if database['description'] in processed_dbs:
